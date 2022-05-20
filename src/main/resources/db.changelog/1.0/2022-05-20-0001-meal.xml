@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="2022-05-20-0001-meal" author="KatyaMitina">
+        <preConditions>
+            <not>
+                <tableExists tableName="meal"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="meal">
+            <column name="id"
+                type="NUMERIC(19,0)"
+                autoIncrement="true">
+                
+                <constraints nullable="false" 
+                             primaryKey="true" />
+            </column>
+            
+            <column name="name"
+                    type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            
+            <column name="country_id"
+                    type="NUMERIC(19,0)">
+
+                <constraints nullable="false"
+                             foreignKeyName="fk_meal_country"
+                             references="country(id)"
+                             deleteCascade="true"/>
+            </column>
+
+
+            <column name="type_id"
+                    type="NUMERIC(19,0)">
+
+                <constraints nullable="false"
+                             foreignKeyName="fk_meal_type"
+                             references="type(id)"
+                             deleteCascade="true"/>
+            </column>
+
+            <column name="time_id"
+                    type="NUMERIC(19,0)">
+
+                <constraints nullable="false"
+                             foreignKeyName="fk_meal_time"
+                             references="time(id)"
+                             deleteCascade="true"/>
+            </column>
+
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
