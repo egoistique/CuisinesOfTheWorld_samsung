@@ -18,3 +18,16 @@ spring:
   liquibase:
     enabled: true
     change-log: classpath:db.changelog/db.changelog-master.xml
+
+  jpa:
+
+    # Отключаем автогенерацию схемы
+    generate-ddl: false
+    #generate-ddl: true
+
+    hibernate:
+      ddl-auto: none
+      #ddl-auto: create-drop
+
+    # Показываем запросы
+    show-sql: true
