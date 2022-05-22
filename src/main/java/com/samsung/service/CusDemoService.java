@@ -1,12 +1,8 @@
 package com.samsung.service;
 
-import com.samsung.domain.Country;
-import com.samsung.domain.Meal;
-import com.samsung.domain.Recipe;
-import com.samsung.repository.CountryRepository;
+import com.samsung.domain.*;
 import com.samsung.repository.MealRepository;
 import com.samsung.repository.RecipeRepository;
-import liquibase.pro.packaged.M;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,80 +11,69 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class CusDemoService {
+public class CusDemoService implements CusDemo{
 
-    private final CountryRepository countryRepository;
-    private final RecipeRepository recipeRepository;
-    private final MealRepository mealRepository;
-
-    public void countryDemo() {
-        List<Country> all = countryRepository.findAll();
-
-        System.out.println("=====================");
-        for (Country country : all) {
-            System.out.println(country);
-        }
-
-        System.out.println("=====================");
-
-        Country country = Country.builder()
-                .name("Германия")
-                .build();
-
-        countryRepository.save(country);
-
-        all = countryRepository.findAll();
-
-        System.out.println("=====================");
-        for (Country country1 : all) {
-            System.out.println(country1);
-        }
-
-        System.out.println("=====================");
-
-        System.out.println(countryRepository.findByName("Россия"));
-    }
+    private final CountryService countryService;
+    private final MealService mealService;
+    private final TypeService typeService;
+    private final TimeService timeService;
+    private final RecipeService recipeService;
 
     @Transactional
-    public void mealDemo() {
-        List<Meal> mealList = mealRepository.findAll();
+    public void countryDemo() {
 
-        System.out.println("======Все блюда======");
+        Country newCompany = Country.builder()
+                .name("Новая Компания")
+                .build();
 
- //       for (Meal meal : mealList) {
+        countryService.insert(newCompany);
+//        companyService.update(1, "Ivan", "Rus", 2, 4);
+        System.out.println("======Все компании======");
 
-//            System.out.println(
-//                    meal.getName() + " : " +
-//                            meal.getCountry().getName() + ", " +
-//                            meal.getType().getName() + ", " +
-//                            meal.getTime().getName()
-//            );
-//
-//            List<Recipe> recipeList = meal.getRecipes();
-//
-//            for (Recipe recipe : recipeList){
-//                System.out.println(recipe.getContent());
-//            }
+        for (Country company : countryService.getAll()) {
 
-            List<Meal> mealList1 = mealRepository.findByName("Болоньезе");
+            System.out.println(company);
+        }
 
-            for (Meal meal1 : mealList1) {
-                System.out.println(
-                        meal1.getName() + " : " +
-                                meal1.getCountry().getName() + ", " +
-                                meal1.getType().getName() + ", " +
-                                meal1.getTime().getName()
-                );
+        System.out.println("======================\n");
+    }
 
-                List<Recipe> recipeList = meal1.getRecipes();
+    @Override
+    @Transactional
+    public void typeDemo() {
 
-                for (Recipe recipe : recipeList) {
-                    System.out.println(recipe.getContent());
-                }
-            }
+        Type newType = Type.builder()
+                .name("Новый Жанр")
+                .build();
 
-       // }
+//        genreService.insert(newGenre);
 
+        System.out.println("======Все жанры======");
+
+        for (Type type : typeService.getAll()) {
+
+            System.out.println(type);
+        }
+
+        System.out.println("======================\n");
+    }
+
+    @Override
+    @Transactional
+    public void timeDemo() {
+
+        Time newTime = Time.builder()
+                .name("Новый Жанр")
+                .build();
+
+//        genreService.insert(newGenre);
+
+        System.out.println("======Все жанры======");
+
+        for (Time time : timeService.getAll()) {
+
+            System.out.println(time);
+        }
 
         System.out.println("======================\n");
     }
@@ -96,24 +81,52 @@ public class CusDemoService {
     @Transactional
     public void recipeDemo() {
 
-        recipeRepository.updateContentById(1, "берем воду и кипятим");
-        List<Recipe> recipeList = recipeRepository.findAll();
+        System.out.println("======Все отзывы======");
 
-        System.out.println("======Все рецепты======");
-
-        for (Recipe recipe : recipeRepository.findAll()) {
+        for (Recipe recipe : recipeService.getAll()) {
 
             System.out.println(recipe.getMeal().getName() + " : " + recipe.getContent());
-            System.out.println(recipe.getId() + " - " + recipe.getContent());
+        }
+
+        System.out.println("======================\n");
+    }
+
+    @Transactional
+    public void mealDemo() {
+
+        Meal meal = Meal.builder()
+                .name("Новая игра")
+                .country(countryService.getByName("Новая Компания"))
+                .type(typeService.getByName("Новый Жанр"))
+                .time(timeService.getByName("Новый Жанр"))
+                .build();
+
+        mealService.insert("CHEF", "Россия", "Мясо", "30 минут");
+        System.out.println("======Все игры======");
+
+        for (Meal meal1 : mealService.getAll()) {
+
+            System.out.println(
+                    meal1.getName() + " : " +
+                            meal1.getCountry().getName() + ", " +
+                            meal1.getType().getName()  + ", " +
+                            meal1.getTime().getName()
+            );
         }
 
         System.out.println("======================\n");
 
-        recipeList = recipeRepository.findByMealId(2);
-        for (Recipe recipe : recipeRepository.findAll()) {
+    }
 
-            System.out.println(recipe.getMeal().getName() + " : " + recipe.getContent());
-            System.out.println(recipe.getId() + " - " + recipe.getContent());
-        }
+    @Override
+    @Transactional
+    public void cusDemo() {
+
+        countryDemo();
+        mealDemo();
+        typeDemo();
+        timeDemo();
+        recipeDemo();
+
     }
 }

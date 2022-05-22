@@ -2,6 +2,7 @@ package com.samsung;
 
 import com.samsung.domain.Country;
 import com.samsung.repository.CountryRepository;
+import com.samsung.service.CusDemo;
 import com.samsung.service.CusDemoService;
 import org.h2.tools.Console;
 import org.springframework.boot.ConfigurableBootstrapContext;
@@ -19,8 +20,10 @@ public class App {
         ConfigurableApplicationContext context = SpringApplication.run(App.class, args);
 
 
-        context.getBean(CusDemoService.class).mealDemo();
-        context.close();
+//        CusDemo libraryDemo = context.getBean(CusDemo.class);
+//        libraryDemo.mealDemo();
+//        libraryDemo.cusDemo();
+//        context.close();
 
 //        try {
 //            Console.main(args);
