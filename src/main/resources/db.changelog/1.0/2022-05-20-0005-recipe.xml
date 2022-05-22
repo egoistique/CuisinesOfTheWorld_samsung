@@ -39,7 +39,8 @@
 
                 <constraints nullable="false"
                              foreignKeyName="fk_recipe_meal"
-                             references="meal(id)"/>
+                             references="meal(id)"
+                deleteCascade="true"/>
             </column>
         </createTable>
     </changeSet>
