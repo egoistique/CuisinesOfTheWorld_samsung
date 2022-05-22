@@ -20,7 +20,7 @@ public class App {
         ConfigurableApplicationContext context = SpringApplication.run(App.class, args);
 
 
-//        CusDemo libraryDemo = context.getBean(CusDemo.class);
+        CusDemo libraryDemo = context.getBean(CusDemo.class);
 //        libraryDemo.mealDemo();
 //        libraryDemo.cusDemo();
 //        context.close();
