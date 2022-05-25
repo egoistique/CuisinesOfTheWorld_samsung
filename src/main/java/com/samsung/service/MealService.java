@@ -11,7 +11,7 @@ public interface MealService {
                 String time);
 
     Meal update(int id,
-                String nameBook,
+                String nameMeal,
                 String nameType,
                 String nameCountry,
                 String nameTime);

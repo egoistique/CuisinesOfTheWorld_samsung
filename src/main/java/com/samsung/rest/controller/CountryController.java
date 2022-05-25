@@ -15,14 +15,14 @@ public class CountryController {
     private final CountryService countryService;
 
     @PostMapping("/country")
-    public CountryDto createNewCompany(@RequestBody CountryDto countryDto) {
+    public CountryDto createNewCountry(@RequestBody CountryDto countryDto) {
 
         Country country = countryService.insert(CountryDto.toDomainObject(countryDto));
         return CountryDto.toDto(country);
     }
 
     @GetMapping("/country")
-    public List<CountryDto> getAllCompanies() {
+    public List<CountryDto> getAllCountries() {
 
         return countryService
                 .getAll()
@@ -32,13 +32,13 @@ public class CountryController {
     }
 
     @GetMapping("/country/{id}")
-    public CountryDto getCompanyById(@PathVariable int id) {
+    public CountryDto getCountryById(@PathVariable int id) {
 
         return CountryDto.toDto(countryService.getById(id));
     }
 
     @GetMapping("/country/name")
-    public CountryDto getCompanyByName(@RequestParam String name) {
+    public CountryDto getCountryByName(@RequestParam String name) {
 
         return CountryDto.toDto(countryService.getByName(name));
     }
@@ -55,7 +55,7 @@ public class CountryController {
     }
 
     @DeleteMapping("/country/{id}")
-    public void deleteCompanyById(@PathVariable int id) {
+    public void deleteCountryById(@PathVariable int id) {
 
         countryService.deleteById(id);
     }

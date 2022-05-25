@@ -22,17 +22,17 @@ public class CusDemoService implements CusDemo{
     @Transactional
     public void countryDemo() {
 
-        Country newCompany = Country.builder()
+        Country newCountry = Country.builder()
                 .name("Новая Компания")
                 .build();
 
-        countryService.insert(newCompany);
+        countryService.insert(newCountry);
 //        companyService.update(1, "Ivan", "Rus", 2, 4);
         System.out.println("======Все компании======");
 
-        for (Country company : countryService.getAll()) {
+        for (Country country : countryService.getAll()) {
 
-            System.out.println(company);
+            System.out.println(country);
         }
 
         System.out.println("======================\n");

@@ -11,11 +11,11 @@ import javax.persistence.PersistenceContext;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("Класс AuthorDaoJPA")
+@DisplayName("Класс CountryDaoJPA")
 @DataJpaTest
 class CountryRepositoryTest {
 
-    public static final int EXISTING_AUTHOR_COUNT = 3;
+    public static final int EXISTING_COUNTRY_COUNT = 3;
     public static final int EXISTING_ID1 = 1;
     public static final String EXISTING_NAME1 = "Россия";
     public static final int EXISTING_ID2 = 2;
@@ -31,86 +31,86 @@ class CountryRepositoryTest {
 
     @DisplayName("должен добавлять автора")
     @Test
-    void shouldInsertAuthor() {
+    void shouldInsertCountry() {
 
-        Country expectedAuthor = Country.builder()
+        Country expectedCountry = Country.builder()
                 .id(4)
                 .name("Ivan")
                 .build();
 
-        dao.save(expectedAuthor);
-        Country actualAuthor = dao.getById(4);
+        dao.save(expectedCountry);
+        Country actualCountry = dao.getById(4);
 
-        assertThat(actualAuthor).isEqualTo(expectedAuthor);
+        assertThat(actualCountry).isEqualTo(expectedCountry);
     }
 
     @DisplayName("должен обновлять автора")
     @Test
-    void shouldUpdateAuthor() {
-        Country expectedAuthor1 = Country.builder()
+    void shouldUpdateCountry() {
+        Country expectedCountry1 = Country.builder()
                 .id(EXISTING_ID1)
                 .name("Ivan")
                 .build();
 
-        dao.save(expectedAuthor1);
-        Country actualAuthor = dao.getById(EXISTING_ID1);
+        dao.save(expectedCountry1);
+        Country actualCountry = dao.getById(EXISTING_ID1);
 
-        assertThat(actualAuthor).isEqualTo(expectedAuthor1);
+        assertThat(actualCountry).isEqualTo(expectedCountry1);
     }
 
     @DisplayName("должен возвращать всех авторов")
     @Test
-    void shouldGetAllAuthors() {
+    void shouldGetAllCountrys() {
 
-        Country expectedAuthor1 = Country.builder()
+        Country expectedCountry1 = Country.builder()
                 .id(EXISTING_ID1)
                 .name(EXISTING_NAME1)
                 .build();
-        Country expectedAuthor2 = Country.builder()
+        Country expectedCountry2 = Country.builder()
                 .id(EXISTING_ID2)
                 .name(EXISTING_NAME2)
                 .build();
-        Country expectedAuthor3 = Country.builder()
+        Country expectedCountry3 = Country.builder()
                 .id(EXISTING_ID3)
                 .name(EXISTING_NAME3)
                 .build();
 
-        assertThat(dao.findAll().size()).isEqualTo(EXISTING_AUTHOR_COUNT);
+        assertThat(dao.findAll().size()).isEqualTo(EXISTING_COUNTRY_COUNT);
         assertThat(dao.findAll())
-                .containsExactlyInAnyOrder(expectedAuthor1, expectedAuthor2, expectedAuthor3);
+                .containsExactlyInAnyOrder(expectedCountry1, expectedCountry2, expectedCountry3);
     }
 
     @DisplayName("должен возвращать автора по id")
     @Test
-    void shouldGetAuthorById() {
+    void shouldGetCountryById() {
 
-        Country expectedAuthor = Country.builder()
+        Country expectedCountry = Country.builder()
                 .id(EXISTING_ID1)
                 .name(EXISTING_NAME1)
                 .build();
 
-        Country actualAuthor = dao.getById(EXISTING_ID1);
+        Country actualCountry = dao.getById(EXISTING_ID1);
 
-        assertThat(actualAuthor).isEqualTo(expectedAuthor);
+        assertThat(actualCountry).isEqualTo(expectedCountry);
     }
 
     @DisplayName("должен возвращать автора по имени")
     @Test
-    void shouldGetAuthorByName() {
+    void shouldGetCountryByName() {
 
-        Country expectedAuthor = Country.builder()
+        Country expectedCountry = Country.builder()
                 .id(EXISTING_ID1)
                 .name(EXISTING_NAME1)
                 .build();
 
-        Country actualAuthor = dao.findByName(EXISTING_NAME1);
+        Country actualCountry = dao.findByName(EXISTING_NAME1);
 
-        assertThat(actualAuthor).isEqualTo(expectedAuthor);
+        assertThat(actualCountry).isEqualTo(expectedCountry);
     }
 
     @DisplayName("должен удалять автора по id")
     @Test
-    void shouldDeleteAuthorById() {
+    void shouldDeleteCountryById() {
 
         int sizeBefore = dao.findAll().size();
 

@@ -1,5 +1,6 @@
 package com.samsung.domain;
 
+import liquibase.pro.packaged.I;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,5 +22,5 @@ public class Country {
 
     @Column(name = "name")
     private String name;
-    
+
 }

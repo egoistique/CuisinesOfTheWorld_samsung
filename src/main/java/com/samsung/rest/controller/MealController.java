@@ -15,18 +15,19 @@ public class MealController {
     private final MealService mealService;
 
     @PostMapping("/meal")
-    public MealDto createNewGame(
-            @RequestParam String nameGame,
-            @RequestParam String nameGenre, @RequestParam String release,
-            @RequestParam String nameCompany
+    public MealDto createNewMeal(
+            @RequestParam String nameMeal,
+            @RequestParam String nameType,
+            @RequestParam String nameTime,
+            @RequestParam String nameCountry
     ) {
 
-        Meal game = mealService.insert(nameGame, nameCompany, nameGenre, release);
-        return MealDto.toDto(game);
+        Meal meal = mealService.insert(nameMeal, nameCountry, nameType, nameTime);
+        return MealDto.toDto(meal);
     }
 
     @GetMapping("/meal")
-    public List<MealDto> getAllGames() {
+    public List<MealDto> getAllMeals() {
 
         return mealService
                 .getAll()
@@ -37,7 +38,7 @@ public class MealController {
 
 
     @PostMapping("/meal/{id}/")
-    public MealDto updateBookById(
+    public MealDto updateMealById(
             @PathVariable int id,
             @RequestParam String newMealName,
             @RequestParam String newCountryName,
@@ -57,20 +58,20 @@ public class MealController {
     }
 
     @GetMapping("/meal/{id}")
-    public MealDto getGameById(@PathVariable int id) {
+    public MealDto getMealById(@PathVariable int id) {
 
         return MealDto.toDto(mealService.getById(id));
     }
 
     @GetMapping("/meal/name")
-    public MealDto getGameByName(@RequestParam String name) {
+    public MealDto getMealByName(@RequestParam String name) {
 
         return MealDto.toDto(mealService.getByName(name));
     }
 
     @DeleteMapping("/meal/{id}")
     //@PostMapping("/deleteBookById")
-    public void deleteGameById(@PathVariable int id) {
+    public void deleteMealById(@PathVariable int id) {
 
         mealService.deleteById(id);
     }

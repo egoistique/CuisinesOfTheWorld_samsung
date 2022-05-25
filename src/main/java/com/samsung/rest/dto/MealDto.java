@@ -28,12 +28,12 @@ public class MealDto {
 
     private List<RecipeDto> recipeDto;
 
-    public static Meal toDomainObject(MealDto gameDto, List<Recipe> recipes) {
-        return new Meal(gameDto.getId(), gameDto.getName(),
+    public static Meal toDomainObject(MealDto mealDto, List<Recipe> recipes) {
+        return new Meal(mealDto.getId(), mealDto.getName(),
                 recipes,
-                CountryDto.toDomainObject(gameDto.getCountryDto()),
-                TypeDto.toDomainObject(gameDto.getTypeDto()),
-                TimeDto.toDomainObject(gameDto.getTimeDto()));
+                CountryDto.toDomainObject(mealDto.getCountryDto()),
+                TypeDto.toDomainObject(mealDto.getTypeDto()),
+                TimeDto.toDomainObject(mealDto.getTimeDto()));
     }
 
     public static MealDto toDto(Meal meal) {

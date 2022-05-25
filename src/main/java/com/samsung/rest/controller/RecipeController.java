@@ -19,10 +19,10 @@ public class RecipeController {
     @PostMapping("/recipe")
     public RecipeDto createNewComment(
             @RequestParam String content,
-            @RequestParam int bookId
+            @RequestParam int mealId
     ) {
 
-        Recipe comment = recipeService.insert(content, bookId);
+        Recipe comment = recipeService.insert(content, mealId);
 
         return RecipeDto.toDto(comment);
     }
@@ -53,7 +53,7 @@ public class RecipeController {
     }
 
     @GetMapping("/meal/{id}/recipe")
-    public List<RecipeDto> getCommentsByBookId(@PathVariable int id) {
+    public List<RecipeDto> getCommentsByMealIdId(@PathVariable int id) {
 
         return recipeService
                 .getByMealId(id)

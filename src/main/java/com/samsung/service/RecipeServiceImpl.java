@@ -19,9 +19,9 @@ public class RecipeServiceImpl implements RecipeService{
 
     @Override
     @Transactional
-    public Recipe insert(String content, int gameId) {
+    public Recipe insert(String content, int mealId) {
 
-        Meal meal = mealRepository.findById(gameId).orElse(null);
+        Meal meal = mealRepository.findById(mealId).orElse(null);
 
         Recipe recipe = Recipe.builder()
                 .content(content)

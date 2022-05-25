@@ -23,6 +23,10 @@ public class MealServiceImpl implements MealService{
     private final TimeRepository timeRepository;
     private final MealRepository mealRepository;
 
+    private final CountryService countryService;
+    private final TypeService typeService;
+    private final TimeService timeService;
+
     @Override
     @Transactional
     public Meal insert(String nameMeal, String nameCountry, String nameType, String nameTime) {
@@ -44,8 +48,16 @@ public class MealServiceImpl implements MealService{
 
     @Override
     @Transactional
-    public Meal update(int id, String nameBook, String nameType, String nameCountry, String nameTime) {
-        return null;
+    public Meal update(int id, String nameMeal, String nameType, String nameCountry, String nameTime) {
+        Meal meal = Meal.builder()
+                .id(id)
+                .name(nameMeal)
+                .country(countryService.getByName(nameCountry))
+                .type(typeService.getByName(nameType))
+                .time(timeService.getByName(nameTime))
+                .build();
+
+        return mealRepository.save(meal);
     }
 
     @Override
@@ -55,16 +67,16 @@ public class MealServiceImpl implements MealService{
 
     @Override
     public Meal getById(int id) {
-        return null;
+        return mealRepository.getById(id);
     }
 
     @Override
     public Meal getByName(String name) {
-        return null;
+        return mealRepository.findByName(name);
     }
 
     @Override
     public void deleteById(int id) {
-
+        mealRepository.deleteById(id);
     }
 }
